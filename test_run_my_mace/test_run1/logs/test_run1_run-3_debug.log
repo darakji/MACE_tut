@@ -1,0 +1,372 @@
+2025-01-02 15:56:19.851 INFO: ===========VERIFYING SETTINGS===========
+2025-01-02 15:56:19.851 INFO: MACE version: 0.3.8
+2025-01-02 15:56:19.851 DEBUG: Configuration: Namespace(config='config.yml', name='test_run1', seed=3, work_dir='.', log_dir='test_run1/logs', model_dir='test_run1/models', checkpoints_dir='test_run1/checkpoints', results_dir='test_run1/results', downloads_dir='test_run1/downloads', device='cuda', default_dtype='float32', distributed=False, log_level='INFO', error_table='TotalMAE', model='ScaleShiftMACE', r_max=6.0, radial_type='bessel', num_radial_basis=8, num_cutoff_basis=5, pair_repulsion=False, distance_transform='None', interaction='RealAgnosticResidualInteractionBlock', interaction_first='RealAgnosticResidualInteractionBlock', max_ell=3, correlation=3, num_interactions=2, MLP_irreps='16x0e', radial_MLP='[64, 64, 64]', hidden_irreps=128x0e+128x1o+128x2e, num_channels=128, max_L=2, gate='silu', scaling='rms_forces_scaling', avg_num_neighbors=1, compute_avg_num_neighbors=True, compute_stress=False, compute_forces=True, train_file='/home/rushikeshp/Documents/MTech_Project/MACE/MACE_tut/Tutorials/data/solvent_xtb_train_200.xyz', valid_file=None, valid_fraction=0.1, test_file='/home/rushikeshp/Documents/MTech_Project/MACE/MACE_tut/Tutorials/data/solvent_xtb_test.xyz', test_dir=None, multi_processed_test=False, num_workers=0, pin_memory=True, atomic_numbers=None, mean=None, std=None, statistics_file=None, E0s='average', foundation_filter_elements=True, heads=None, multiheads_finetuning=True, foundation_head=None, weight_pt_head=1.0, num_samples_pt=1000, subselect_pt='random', pt_train_file=None, pt_valid_file=None, keep_isolated_atoms=False, energy_key='energy_xtb', forces_key='forces_xtb', virials_key='REF_virials', stress_key='REF_stress', dipole_key='REF_dipole', charges_key='REF_charges', loss='weighted', forces_weight=1000.0, swa_forces_weight=1000.0, energy_weight=8.0, swa_energy_weight=8.0, virials_weight=1.0, swa_virials_weight=10.0, stress_weight=1.0, swa_stress_weight=10.0, dipole_weight=1.0, swa_dipole_weight=1.0, config_type_weights='{"Default":1.0}', huber_delta=0.01, optimizer='adam', beta=0.9, batch_size=5, valid_batch_size=10, lr=0.01, swa_lr=0.001, weight_decay=5e-07, amsgrad=True, scheduler='ReduceLROnPlateau', lr_factor=0.8, scheduler_patience=50, lr_scheduler_gamma=0.9993, swa=True, start_swa=7, ema=True, ema_decay=0.99, max_num_epochs=10, patience=10, foundation_model=None, foundation_model_readout=True, eval_interval=1, keep_checkpoints=False, save_all_checkpoints=False, restart_latest=True, save_cpu=False, clip_grad=10.0, wandb=False, wandb_dir=None, wandb_project='', wandb_entity='', wandb_name='', wandb_log_hypers=['num_channels', 'max_L', 'correlation', 'lr', 'swa_lr', 'weight_decay', 'batch_size', 'max_num_epochs', 'start_swa', 'energy_weight', 'forces_weight'])
+2025-01-02 15:56:19.936 INFO: CUDA version: 12.1, CUDA device: 0
+2025-01-02 15:56:19.936 INFO: ===========LOADING INPUT DATA===========
+2025-01-02 15:56:19.936 INFO: Using heads: ['default']
+2025-01-02 15:56:19.936 INFO: =============    Processing head default     ===========
+2025-01-02 15:56:20.071 INFO: Using isolated atom energies from training file
+2025-01-02 15:56:20.076 INFO: Training set [200 configs, 200 energy, 17418 forces] loaded from '/home/rushikeshp/Documents/MTech_Project/MACE/MACE_tut/Tutorials/data/solvent_xtb_train_200.xyz'
+2025-01-02 15:56:20.077 INFO: Using random 10% of training set for validation with indices saved in: ./valid_indices_3.txt
+2025-01-02 15:56:20.077 INFO: Validaton set contains 20 configurations [20 energy, 1923 forces]
+2025-01-02 15:56:20.507 INFO: Test set (1000 configs) loaded from '/home/rushikeshp/Documents/MTech_Project/MACE/MACE_tut/Tutorials/data/solvent_xtb_test.xyz':
+2025-01-02 15:56:20.508 INFO: Default_Default: 1000 configs, 1000 energy, 90228 forces
+2025-01-02 15:56:20.508 INFO: Total number of configurations: train=180, valid=20, tests=[Default_Default: 1000],
+2025-01-02 15:56:20.509 INFO: Atomic Numbers used: [1, 6, 8]
+2025-01-02 15:56:20.509 INFO: Atomic Energies used (z: eV) for head default: {1: -10.707211383396714, 6: -48.847445262804705, 8: -102.57117256025786}
+2025-01-02 15:56:20.700 INFO: Computing average number of neighbors
+2025-01-02 15:56:20.979 INFO: Average number of neighbors: 15.982962608337402
+2025-01-02 15:56:20.979 INFO: During training the following quantities will be reported: energy, forces
+2025-01-02 15:56:20.979 INFO: ===========MODEL DETAILS===========
+2025-01-02 15:56:21.150 INFO: Building model
+2025-01-02 15:56:21.151 INFO: Message passing with 128 channels and max_L=2 (128x0e+128x1o+128x2e)
+2025-01-02 15:56:21.151 INFO: 2 layers, each with correlation order: 3 (body order: 4) and spherical harmonics up to: l=3
+2025-01-02 15:56:21.151 INFO: 8 radial and 5 basis functions
+2025-01-02 15:56:21.151 INFO: Radial cutoff: 6.0 A (total receptive field for each atom: 12.0 A)
+2025-01-02 15:56:21.151 INFO: Distance transform for radial basis functions: None
+2025-01-02 15:56:21.151 INFO: Hidden irreps: 128x0e+128x1o+128x2e
+2025-01-02 15:56:27.248 DEBUG: ScaleShiftMACE(
+  (node_embedding): LinearNodeEmbeddingBlock(
+    (linear): Linear(3x0e -> 128x0e | 384 weights)
+  )
+  (radial_embedding): RadialEmbeddingBlock(
+    (bessel_fn): BesselBasis(r_max=6.0, num_basis=8, trainable=False)
+    (cutoff_fn): PolynomialCutoff(p=5.0, r_max=6.0)
+  )
+  (spherical_harmonics): SphericalHarmonics()
+  (atomic_energies_fn): AtomicEnergiesBlock(energies=[[-10.7072, -48.8474, -102.5712]])
+  (interactions): ModuleList(
+    (0): RealAgnosticResidualInteractionBlock(
+      (linear_up): Linear(128x0e -> 128x0e | 16384 weights)
+      (conv_tp): TensorProduct(128x0e x 1x0e+1x1o+1x2e+1x3o -> 128x0e+128x1o+128x2e+128x3o | 512 paths | 512 weights)
+      (conv_tp_weights): FullyConnectedNet[8, 64, 64, 64, 512]
+      (linear): Linear(128x0e+128x1o+128x2e+128x3o -> 128x0e+128x1o+128x2e+128x3o | 65536 weights)
+      (skip_tp): FullyConnectedTensorProduct(128x0e x 3x0e -> 128x0e+128x1o+128x2e | 49152 paths | 49152 weights)
+      (reshape): reshape_irreps()
+    )
+    (1): RealAgnosticResidualInteractionBlock(
+      (linear_up): Linear(128x0e+128x1o+128x2e -> 128x0e+128x1o+128x2e | 49152 weights)
+      (conv_tp): TensorProduct(128x0e+128x1o+128x2e x 1x0e+1x1o+1x2e+1x3o -> 384x0e+640x1o+640x2e+512x3o | 2176 paths | 2176 weights)
+      (conv_tp_weights): FullyConnectedNet[8, 64, 64, 64, 2176]
+      (linear): Linear(384x0e+640x1o+640x2e+512x3o -> 128x0e+128x1o+128x2e+128x3o | 278528 weights)
+      (skip_tp): FullyConnectedTensorProduct(128x0e+128x1o+128x2e x 3x0e -> 128x0e | 49152 paths | 49152 weights)
+      (reshape): reshape_irreps()
+    )
+  )
+  (products): ModuleList(
+    (0): EquivariantProductBasisBlock(
+      (symmetric_contractions): SymmetricContraction(
+        (contractions): ModuleList(
+          (0): Contraction(
+            (contractions_weighting): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (contractions_features): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (weights): ParameterList(
+                (0): Parameter containing: [torch.float32 of size 3x4x128 (cuda:0)]
+                (1): Parameter containing: [torch.float32 of size 3x1x128 (cuda:0)]
+            )
+            (graph_opt_main): GraphModule()
+          )
+          (1): Contraction(
+            (contractions_weighting): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (contractions_features): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (weights): ParameterList(
+                (0): Parameter containing: [torch.float32 of size 3x6x128 (cuda:0)]
+                (1): Parameter containing: [torch.float32 of size 3x1x128 (cuda:0)]
+            )
+            (graph_opt_main): GraphModule()
+          )
+          (2): Contraction(
+            (contractions_weighting): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (contractions_features): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (weights): ParameterList(
+                (0): Parameter containing: [torch.float32 of size 3x7x128 (cuda:0)]
+                (1): Parameter containing: [torch.float32 of size 3x1x128 (cuda:0)]
+            )
+            (graph_opt_main): GraphModule()
+          )
+        )
+      )
+      (linear): Linear(128x0e+128x1o+128x2e -> 128x0e+128x1o+128x2e | 49152 weights)
+    )
+    (1): EquivariantProductBasisBlock(
+      (symmetric_contractions): SymmetricContraction(
+        (contractions): ModuleList(
+          (0): Contraction(
+            (contractions_weighting): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (contractions_features): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (weights): ParameterList(
+                (0): Parameter containing: [torch.float32 of size 3x4x128 (cuda:0)]
+                (1): Parameter containing: [torch.float32 of size 3x1x128 (cuda:0)]
+            )
+            (graph_opt_main): GraphModule()
+          )
+        )
+      )
+      (linear): Linear(128x0e -> 128x0e | 16384 weights)
+    )
+  )
+  (readouts): ModuleList(
+    (0): LinearReadoutBlock(
+      (linear): Linear(128x0e+128x1o+128x2e -> 1x0e | 128 weights)
+    )
+    (1): NonLinearReadoutBlock(
+      (linear_1): Linear(128x0e -> 16x0e | 2048 weights)
+      (non_linearity): Activation [x] (16x0e -> 16x0e)
+      (linear_2): Linear(16x0e -> 1x0e | 16 weights)
+    )
+  )
+  (scale_shift): ScaleShiftBlock(scale=2.2872, shift=-6.1143)
+)
+2025-01-02 15:56:27.250 INFO: Total number of parameters: 837264
+2025-01-02 15:56:27.251 INFO: 
+2025-01-02 15:56:27.251 INFO: ===========OPTIMIZER INFORMATION===========
+2025-01-02 15:56:27.251 INFO: Using ADAM as parameter optimizer
+2025-01-02 15:56:27.251 INFO: Batch size: 5
+2025-01-02 15:56:27.251 INFO: Using Exponential Moving Average with decay: 0.99
+2025-01-02 15:56:27.251 INFO: Number of gradient updates: 360
+2025-01-02 15:56:27.251 INFO: Learning rate: 0.01, weight decay: 5e-07
+2025-01-02 15:56:27.251 INFO: WeightedEnergyForcesLoss(energy_weight=8.000, forces_weight=1000.000)
+2025-01-02 15:56:27.252 INFO: Stage Two (after 7 epochs) with loss function: WeightedEnergyForcesLoss(energy_weight=8.000, forces_weight=1000.000), with energy weight : 8.0, forces weight : 1000.0 and learning rate : 0.001
+2025-01-02 15:56:27.367 WARNING: Cannot find checkpoint with tag 'test_run1_run-3' in 'test_run1/checkpoints'
+2025-01-02 15:57:09.864 INFO: ===========VERIFYING SETTINGS===========
+2025-01-02 15:57:09.866 INFO: MACE version: 0.3.8
+2025-01-02 15:57:09.866 DEBUG: Configuration: Namespace(config='config.yml', name='test_run1', seed=3, work_dir='.', log_dir='test_run1/logs', model_dir='test_run1/models', checkpoints_dir='test_run1/checkpoints', results_dir='test_run1/results', downloads_dir='test_run1/downloads', device='cuda', default_dtype='float32', distributed=False, log_level='INFO', error_table='TotalMAE', model='ScaleShiftMACE', r_max=6.0, radial_type='bessel', num_radial_basis=8, num_cutoff_basis=5, pair_repulsion=False, distance_transform='None', interaction='RealAgnosticResidualInteractionBlock', interaction_first='RealAgnosticResidualInteractionBlock', max_ell=3, correlation=3, num_interactions=2, MLP_irreps='16x0e', radial_MLP='[64, 64, 64]', hidden_irreps=128x0e+128x1o+128x2e, num_channels=128, max_L=2, gate='silu', scaling='rms_forces_scaling', avg_num_neighbors=1, compute_avg_num_neighbors=True, compute_stress=False, compute_forces=True, train_file='/home/rushikeshp/Documents/MTech_Project/MACE/MACE_tut/Tutorials/data/solvent_xtb_train_200.xyz', valid_file=None, valid_fraction=0.1, test_file='/home/rushikeshp/Documents/MTech_Project/MACE/MACE_tut/Tutorials/data/solvent_xtb_test.xyz', test_dir=None, multi_processed_test=False, num_workers=0, pin_memory=True, atomic_numbers=None, mean=None, std=None, statistics_file=None, E0s='average', foundation_filter_elements=True, heads=None, multiheads_finetuning=True, foundation_head=None, weight_pt_head=1.0, num_samples_pt=1000, subselect_pt='random', pt_train_file=None, pt_valid_file=None, keep_isolated_atoms=False, energy_key='energy_xtb', forces_key='forces_xtb', virials_key='REF_virials', stress_key='REF_stress', dipole_key='REF_dipole', charges_key='REF_charges', loss='weighted', forces_weight=1000.0, swa_forces_weight=1000.0, energy_weight=8.0, swa_energy_weight=8.0, virials_weight=1.0, swa_virials_weight=10.0, stress_weight=1.0, swa_stress_weight=10.0, dipole_weight=1.0, swa_dipole_weight=1.0, config_type_weights='{"Default":1.0}', huber_delta=0.01, optimizer='adam', beta=0.9, batch_size=5, valid_batch_size=10, lr=0.01, swa_lr=0.001, weight_decay=5e-07, amsgrad=True, scheduler='ReduceLROnPlateau', lr_factor=0.8, scheduler_patience=50, lr_scheduler_gamma=0.9993, swa=True, start_swa=7, ema=True, ema_decay=0.99, max_num_epochs=10, patience=10, foundation_model=None, foundation_model_readout=True, eval_interval=1, keep_checkpoints=False, save_all_checkpoints=False, restart_latest=True, save_cpu=False, clip_grad=10.0, wandb=False, wandb_dir=None, wandb_project='', wandb_entity='', wandb_name='', wandb_log_hypers=['num_channels', 'max_L', 'correlation', 'lr', 'swa_lr', 'weight_decay', 'batch_size', 'max_num_epochs', 'start_swa', 'energy_weight', 'forces_weight'])
+2025-01-02 15:57:09.908 INFO: CUDA version: 12.1, CUDA device: 0
+2025-01-02 15:57:09.909 INFO: ===========LOADING INPUT DATA===========
+2025-01-02 15:57:09.910 INFO: Using heads: ['default']
+2025-01-02 15:57:09.910 INFO: =============    Processing head default     ===========
+2025-01-02 15:57:09.988 INFO: Using isolated atom energies from training file
+2025-01-02 15:57:09.992 INFO: Training set [200 configs, 200 energy, 17418 forces] loaded from '/home/rushikeshp/Documents/MTech_Project/MACE/MACE_tut/Tutorials/data/solvent_xtb_train_200.xyz'
+2025-01-02 15:57:09.993 INFO: Using random 10% of training set for validation with indices saved in: ./valid_indices_3.txt
+2025-01-02 15:57:09.993 INFO: Validaton set contains 20 configurations [20 energy, 1923 forces]
+2025-01-02 15:57:10.332 INFO: Test set (1000 configs) loaded from '/home/rushikeshp/Documents/MTech_Project/MACE/MACE_tut/Tutorials/data/solvent_xtb_test.xyz':
+2025-01-02 15:57:10.333 INFO: Default_Default: 1000 configs, 1000 energy, 90228 forces
+2025-01-02 15:57:10.333 INFO: Total number of configurations: train=180, valid=20, tests=[Default_Default: 1000],
+2025-01-02 15:57:10.334 INFO: Atomic Numbers used: [1, 6, 8]
+2025-01-02 15:57:10.334 INFO: Atomic Energies used (z: eV) for head default: {1: -10.707211383396714, 6: -48.847445262804705, 8: -102.57117256025786}
+2025-01-02 15:57:10.482 INFO: Computing average number of neighbors
+2025-01-02 15:57:10.656 INFO: Average number of neighbors: 15.982962608337402
+2025-01-02 15:57:10.656 INFO: During training the following quantities will be reported: energy, forces
+2025-01-02 15:57:10.656 INFO: ===========MODEL DETAILS===========
+2025-01-02 15:57:10.718 INFO: Building model
+2025-01-02 15:57:10.718 INFO: Message passing with 128 channels and max_L=2 (128x0e+128x1o+128x2e)
+2025-01-02 15:57:10.718 INFO: 2 layers, each with correlation order: 3 (body order: 4) and spherical harmonics up to: l=3
+2025-01-02 15:57:10.719 INFO: 8 radial and 5 basis functions
+2025-01-02 15:57:10.719 INFO: Radial cutoff: 6.0 A (total receptive field for each atom: 12.0 A)
+2025-01-02 15:57:10.719 INFO: Distance transform for radial basis functions: None
+2025-01-02 15:57:10.719 INFO: Hidden irreps: 128x0e+128x1o+128x2e
+2025-01-02 15:57:13.558 DEBUG: ScaleShiftMACE(
+  (node_embedding): LinearNodeEmbeddingBlock(
+    (linear): Linear(3x0e -> 128x0e | 384 weights)
+  )
+  (radial_embedding): RadialEmbeddingBlock(
+    (bessel_fn): BesselBasis(r_max=6.0, num_basis=8, trainable=False)
+    (cutoff_fn): PolynomialCutoff(p=5.0, r_max=6.0)
+  )
+  (spherical_harmonics): SphericalHarmonics()
+  (atomic_energies_fn): AtomicEnergiesBlock(energies=[[-10.7072, -48.8474, -102.5712]])
+  (interactions): ModuleList(
+    (0): RealAgnosticResidualInteractionBlock(
+      (linear_up): Linear(128x0e -> 128x0e | 16384 weights)
+      (conv_tp): TensorProduct(128x0e x 1x0e+1x1o+1x2e+1x3o -> 128x0e+128x1o+128x2e+128x3o | 512 paths | 512 weights)
+      (conv_tp_weights): FullyConnectedNet[8, 64, 64, 64, 512]
+      (linear): Linear(128x0e+128x1o+128x2e+128x3o -> 128x0e+128x1o+128x2e+128x3o | 65536 weights)
+      (skip_tp): FullyConnectedTensorProduct(128x0e x 3x0e -> 128x0e+128x1o+128x2e | 49152 paths | 49152 weights)
+      (reshape): reshape_irreps()
+    )
+    (1): RealAgnosticResidualInteractionBlock(
+      (linear_up): Linear(128x0e+128x1o+128x2e -> 128x0e+128x1o+128x2e | 49152 weights)
+      (conv_tp): TensorProduct(128x0e+128x1o+128x2e x 1x0e+1x1o+1x2e+1x3o -> 384x0e+640x1o+640x2e+512x3o | 2176 paths | 2176 weights)
+      (conv_tp_weights): FullyConnectedNet[8, 64, 64, 64, 2176]
+      (linear): Linear(384x0e+640x1o+640x2e+512x3o -> 128x0e+128x1o+128x2e+128x3o | 278528 weights)
+      (skip_tp): FullyConnectedTensorProduct(128x0e+128x1o+128x2e x 3x0e -> 128x0e | 49152 paths | 49152 weights)
+      (reshape): reshape_irreps()
+    )
+  )
+  (products): ModuleList(
+    (0): EquivariantProductBasisBlock(
+      (symmetric_contractions): SymmetricContraction(
+        (contractions): ModuleList(
+          (0): Contraction(
+            (contractions_weighting): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (contractions_features): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (weights): ParameterList(
+                (0): Parameter containing: [torch.float32 of size 3x4x128 (cuda:0)]
+                (1): Parameter containing: [torch.float32 of size 3x1x128 (cuda:0)]
+            )
+            (graph_opt_main): GraphModule()
+          )
+          (1): Contraction(
+            (contractions_weighting): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (contractions_features): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (weights): ParameterList(
+                (0): Parameter containing: [torch.float32 of size 3x6x128 (cuda:0)]
+                (1): Parameter containing: [torch.float32 of size 3x1x128 (cuda:0)]
+            )
+            (graph_opt_main): GraphModule()
+          )
+          (2): Contraction(
+            (contractions_weighting): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (contractions_features): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (weights): ParameterList(
+                (0): Parameter containing: [torch.float32 of size 3x7x128 (cuda:0)]
+                (1): Parameter containing: [torch.float32 of size 3x1x128 (cuda:0)]
+            )
+            (graph_opt_main): GraphModule()
+          )
+        )
+      )
+      (linear): Linear(128x0e+128x1o+128x2e -> 128x0e+128x1o+128x2e | 49152 weights)
+    )
+    (1): EquivariantProductBasisBlock(
+      (symmetric_contractions): SymmetricContraction(
+        (contractions): ModuleList(
+          (0): Contraction(
+            (contractions_weighting): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (contractions_features): ModuleList(
+              (0-1): 2 x GraphModule()
+            )
+            (weights): ParameterList(
+                (0): Parameter containing: [torch.float32 of size 3x4x128 (cuda:0)]
+                (1): Parameter containing: [torch.float32 of size 3x1x128 (cuda:0)]
+            )
+            (graph_opt_main): GraphModule()
+          )
+        )
+      )
+      (linear): Linear(128x0e -> 128x0e | 16384 weights)
+    )
+  )
+  (readouts): ModuleList(
+    (0): LinearReadoutBlock(
+      (linear): Linear(128x0e+128x1o+128x2e -> 1x0e | 128 weights)
+    )
+    (1): NonLinearReadoutBlock(
+      (linear_1): Linear(128x0e -> 16x0e | 2048 weights)
+      (non_linearity): Activation [x] (16x0e -> 16x0e)
+      (linear_2): Linear(16x0e -> 1x0e | 16 weights)
+    )
+  )
+  (scale_shift): ScaleShiftBlock(scale=2.2872, shift=-6.1143)
+)
+2025-01-02 15:57:13.560 INFO: Total number of parameters: 837264
+2025-01-02 15:57:13.560 INFO: 
+2025-01-02 15:57:13.560 INFO: ===========OPTIMIZER INFORMATION===========
+2025-01-02 15:57:13.560 INFO: Using ADAM as parameter optimizer
+2025-01-02 15:57:13.560 INFO: Batch size: 5
+2025-01-02 15:57:13.560 INFO: Using Exponential Moving Average with decay: 0.99
+2025-01-02 15:57:13.560 INFO: Number of gradient updates: 360
+2025-01-02 15:57:13.560 INFO: Learning rate: 0.01, weight decay: 5e-07
+2025-01-02 15:57:13.560 INFO: WeightedEnergyForcesLoss(energy_weight=8.000, forces_weight=1000.000)
+2025-01-02 15:57:13.561 INFO: Stage Two (after 7 epochs) with loss function: WeightedEnergyForcesLoss(energy_weight=8.000, forces_weight=1000.000), with energy weight : 8.0, forces weight : 1000.0 and learning rate : 0.001
+2025-01-02 15:57:13.672 WARNING: Cannot find checkpoint with tag 'test_run1_run-3' in 'test_run1/checkpoints'
+2025-01-02 15:57:13.673 INFO: Using gradient clipping with tolerance=10.000
+2025-01-02 15:57:13.673 INFO: 
+2025-01-02 15:57:13.673 INFO: ===========TRAINING===========
+2025-01-02 15:57:13.674 INFO: Started training, reporting errors on validation set
+2025-01-02 15:57:13.674 INFO: Loss metrics on validation set
+2025-01-02 15:57:15.901 INFO: Initial: head: default, loss=299.71771240, MAE_E= 9117.36 meV, MAE_F= 1122.16 meV / A
+2025-01-02 15:57:42.276 INFO: Epoch 0: head: default, loss=63.55058670, MAE_E=12360.53 meV, MAE_F=  520.64 meV / A
+2025-01-02 15:57:42.280 DEBUG: Saving checkpoint: test_run1/checkpoints/test_run1_run-3_epoch-0.pt
+2025-01-02 15:57:48.697 INFO: Epoch 1: head: default, loss=26.28932190, MAE_E= 4996.57 meV, MAE_F=  305.46 meV / A
+2025-01-02 15:57:48.699 DEBUG: Deleting old checkpoint file: test_run1/checkpoints/test_run1_run-3_epoch-0.pt
+2025-01-02 15:57:48.705 DEBUG: Saving checkpoint: test_run1/checkpoints/test_run1_run-3_epoch-1.pt
+2025-01-02 15:57:54.225 INFO: Epoch 2: head: default, loss=14.90446186, MAE_E= 5722.87 meV, MAE_F=  231.53 meV / A
+2025-01-02 15:57:54.227 DEBUG: Deleting old checkpoint file: test_run1/checkpoints/test_run1_run-3_epoch-1.pt
+2025-01-02 15:57:54.230 DEBUG: Saving checkpoint: test_run1/checkpoints/test_run1_run-3_epoch-2.pt
+2025-01-02 15:57:59.808 INFO: Epoch 3: head: default, loss=10.17562294, MAE_E= 4829.47 meV, MAE_F=  193.71 meV / A
+2025-01-02 15:57:59.813 DEBUG: Deleting old checkpoint file: test_run1/checkpoints/test_run1_run-3_epoch-2.pt
+2025-01-02 15:57:59.822 DEBUG: Saving checkpoint: test_run1/checkpoints/test_run1_run-3_epoch-3.pt
+2025-01-02 15:58:05.349 INFO: Epoch 4: head: default, loss=7.37162304, MAE_E= 3929.87 meV, MAE_F=  174.18 meV / A
+2025-01-02 15:58:05.352 DEBUG: Deleting old checkpoint file: test_run1/checkpoints/test_run1_run-3_epoch-3.pt
+2025-01-02 15:58:05.358 DEBUG: Saving checkpoint: test_run1/checkpoints/test_run1_run-3_epoch-4.pt
+2025-01-02 15:58:11.171 INFO: Epoch 5: head: default, loss=5.82491541, MAE_E= 3630.35 meV, MAE_F=  152.73 meV / A
+2025-01-02 15:58:11.173 DEBUG: Deleting old checkpoint file: test_run1/checkpoints/test_run1_run-3_epoch-4.pt
+2025-01-02 15:58:11.178 DEBUG: Saving checkpoint: test_run1/checkpoints/test_run1_run-3_epoch-5.pt
+2025-01-02 15:58:16.974 INFO: Epoch 6: head: default, loss=4.86648655, MAE_E= 3662.67 meV, MAE_F=  141.97 meV / A
+2025-01-02 15:58:16.983 DEBUG: Deleting old checkpoint file: test_run1/checkpoints/test_run1_run-3_epoch-5.pt
+2025-01-02 15:58:16.992 DEBUG: Saving checkpoint: test_run1/checkpoints/test_run1_run-3_epoch-6.pt
+2025-01-02 15:58:17.055 INFO: Changing loss based on Stage Two Weights
+2025-01-02 15:58:22.343 INFO: Epoch 7: head: default, loss=4.33555746, MAE_E= 3246.96 meV, MAE_F=  135.04 meV / A
+2025-01-02 15:58:22.345 DEBUG: Saving checkpoint: test_run1/checkpoints/test_run1_run-3_epoch-7_swa.pt
+2025-01-02 15:58:28.497 INFO: Epoch 8: head: default, loss=3.89026952, MAE_E= 3410.71 meV, MAE_F=  128.06 meV / A
+2025-01-02 15:58:28.500 DEBUG: Deleting old checkpoint file: test_run1/checkpoints/test_run1_run-3_epoch-7_swa.pt
+2025-01-02 15:58:28.506 DEBUG: Saving checkpoint: test_run1/checkpoints/test_run1_run-3_epoch-8_swa.pt
+2025-01-02 15:58:34.118 INFO: Epoch 9: head: default, loss=3.56682968, MAE_E= 3468.93 meV, MAE_F=  122.50 meV / A
+2025-01-02 15:58:34.120 DEBUG: Deleting old checkpoint file: test_run1/checkpoints/test_run1_run-3_epoch-8_swa.pt
+2025-01-02 15:58:34.123 DEBUG: Saving checkpoint: test_run1/checkpoints/test_run1_run-3_epoch-9_swa.pt
+2025-01-02 15:58:34.157 INFO: Training complete
+2025-01-02 15:58:34.157 INFO: 
+2025-01-02 15:58:34.157 INFO: ===========RESULTS===========
+2025-01-02 15:58:34.157 INFO: Computing metrics for training, validation, and test sets
+2025-01-02 15:58:34.865 INFO: Loading checkpoint: test_run1/checkpoints/test_run1_run-3_epoch-6.pt
+2025-01-02 15:58:34.918 INFO: Loaded Stage one model from epoch 6 for evaluation
+2025-01-02 15:58:34.919 INFO: Evaluating train_default ...
+2025-01-02 15:58:37.815 INFO: Evaluating valid_default ...
+2025-01-02 15:58:37.971 INFO: Error-table on TRAIN and VALID:
++---------------+-------------+-----------------+------------------+
+|  config_type  | MAE E / meV | MAE F / meV / A | relative F MAE % |
++---------------+-------------+-----------------+------------------+
+| train_default |     2772.4  |        153.5    |        12.10     |
+| valid_default |     3662.7  |        142.0    |        12.76     |
++---------------+-------------+-----------------+------------------+
+2025-01-02 15:58:37.971 INFO: Evaluating Default_Default ...
+2025-01-02 15:58:48.289 INFO: Error-table on TEST:
++-----------------+-------------+-----------------+------------------+
+|   config_type   | MAE E / meV | MAE F / meV / A | relative F MAE % |
++-----------------+-------------+-----------------+------------------+
+| Default_Default |     3042.3  |        160.1    |        12.56     |
++-----------------+-------------+-----------------+------------------+
+2025-01-02 15:58:48.416 INFO: Saved model at test_run1/models/test_run1.model
+2025-01-02 15:58:48.535 INFO: Saved model to test_run1/checkpoints/test_run1_run-3.model
+2025-01-02 15:58:48.536 INFO: Loading checkpoint: test_run1/checkpoints/test_run1_run-3_epoch-9_swa.pt
+2025-01-02 15:58:48.577 INFO: Loaded Stage two model from epoch 9 for evaluation
+2025-01-02 15:58:48.578 INFO: Evaluating train_default ...
+2025-01-02 15:58:51.930 INFO: Evaluating valid_default ...
+2025-01-02 15:58:52.178 INFO: Error-table on TRAIN and VALID:
++---------------+-------------+-----------------+------------------+
+|  config_type  | MAE E / meV | MAE F / meV / A | relative F MAE % |
++---------------+-------------+-----------------+------------------+
+| train_default |     2534.0  |        130.5    |        10.28     |
+| valid_default |     3468.9  |        122.5    |        11.01     |
++---------------+-------------+-----------------+------------------+
+2025-01-02 15:58:52.179 INFO: Evaluating Default_Default ...
+2025-01-02 15:59:02.024 INFO: Error-table on TEST:
++-----------------+-------------+-----------------+------------------+
+|   config_type   | MAE E / meV | MAE F / meV / A | relative F MAE % |
++-----------------+-------------+-----------------+------------------+
+| Default_Default |     2786.9  |        138.1    |        10.84     |
++-----------------+-------------+-----------------+------------------+
+2025-01-02 15:59:02.075 INFO: Saved stagetwo model at test_run1/models/test_run1_stagetwo.model
+2025-01-02 15:59:02.143 INFO: Saved model to test_run1/checkpoints/test_run1_run-3_stagetwo.model
+2025-01-02 15:59:02.143 INFO: Done

@@ -1,0 +1,136 @@
+2025-01-02 15:56:19.851 INFO: ===========VERIFYING SETTINGS===========
+2025-01-02 15:56:19.851 INFO: MACE version: 0.3.8
+2025-01-02 15:56:19.936 INFO: CUDA version: 12.1, CUDA device: 0
+2025-01-02 15:56:19.936 INFO: ===========LOADING INPUT DATA===========
+2025-01-02 15:56:19.936 INFO: Using heads: ['default']
+2025-01-02 15:56:19.936 INFO: =============    Processing head default     ===========
+2025-01-02 15:56:20.071 INFO: Using isolated atom energies from training file
+2025-01-02 15:56:20.076 INFO: Training set [200 configs, 200 energy, 17418 forces] loaded from '/home/rushikeshp/Documents/MTech_Project/MACE/MACE_tut/Tutorials/data/solvent_xtb_train_200.xyz'
+2025-01-02 15:56:20.077 INFO: Using random 10% of training set for validation with indices saved in: ./valid_indices_3.txt
+2025-01-02 15:56:20.077 INFO: Validaton set contains 20 configurations [20 energy, 1923 forces]
+2025-01-02 15:56:20.507 INFO: Test set (1000 configs) loaded from '/home/rushikeshp/Documents/MTech_Project/MACE/MACE_tut/Tutorials/data/solvent_xtb_test.xyz':
+2025-01-02 15:56:20.508 INFO: Default_Default: 1000 configs, 1000 energy, 90228 forces
+2025-01-02 15:56:20.508 INFO: Total number of configurations: train=180, valid=20, tests=[Default_Default: 1000],
+2025-01-02 15:56:20.509 INFO: Atomic Numbers used: [1, 6, 8]
+2025-01-02 15:56:20.509 INFO: Atomic Energies used (z: eV) for head default: {1: -10.707211383396714, 6: -48.847445262804705, 8: -102.57117256025786}
+2025-01-02 15:56:20.700 INFO: Computing average number of neighbors
+2025-01-02 15:56:20.979 INFO: Average number of neighbors: 15.982962608337402
+2025-01-02 15:56:20.979 INFO: During training the following quantities will be reported: energy, forces
+2025-01-02 15:56:20.979 INFO: ===========MODEL DETAILS===========
+2025-01-02 15:56:21.150 INFO: Building model
+2025-01-02 15:56:21.151 INFO: Message passing with 128 channels and max_L=2 (128x0e+128x1o+128x2e)
+2025-01-02 15:56:21.151 INFO: 2 layers, each with correlation order: 3 (body order: 4) and spherical harmonics up to: l=3
+2025-01-02 15:56:21.151 INFO: 8 radial and 5 basis functions
+2025-01-02 15:56:21.151 INFO: Radial cutoff: 6.0 A (total receptive field for each atom: 12.0 A)
+2025-01-02 15:56:21.151 INFO: Distance transform for radial basis functions: None
+2025-01-02 15:56:21.151 INFO: Hidden irreps: 128x0e+128x1o+128x2e
+2025-01-02 15:56:27.250 INFO: Total number of parameters: 837264
+2025-01-02 15:56:27.251 INFO: 
+2025-01-02 15:56:27.251 INFO: ===========OPTIMIZER INFORMATION===========
+2025-01-02 15:56:27.251 INFO: Using ADAM as parameter optimizer
+2025-01-02 15:56:27.251 INFO: Batch size: 5
+2025-01-02 15:56:27.251 INFO: Using Exponential Moving Average with decay: 0.99
+2025-01-02 15:56:27.251 INFO: Number of gradient updates: 360
+2025-01-02 15:56:27.251 INFO: Learning rate: 0.01, weight decay: 5e-07
+2025-01-02 15:56:27.251 INFO: WeightedEnergyForcesLoss(energy_weight=8.000, forces_weight=1000.000)
+2025-01-02 15:56:27.252 INFO: Stage Two (after 7 epochs) with loss function: WeightedEnergyForcesLoss(energy_weight=8.000, forces_weight=1000.000), with energy weight : 8.0, forces weight : 1000.0 and learning rate : 0.001
+2025-01-02 15:56:27.367 WARNING: Cannot find checkpoint with tag 'test_run1_run-3' in 'test_run1/checkpoints'
+2025-01-02 15:57:09.864 INFO: ===========VERIFYING SETTINGS===========
+2025-01-02 15:57:09.866 INFO: MACE version: 0.3.8
+2025-01-02 15:57:09.908 INFO: CUDA version: 12.1, CUDA device: 0
+2025-01-02 15:57:09.909 INFO: ===========LOADING INPUT DATA===========
+2025-01-02 15:57:09.910 INFO: Using heads: ['default']
+2025-01-02 15:57:09.910 INFO: =============    Processing head default     ===========
+2025-01-02 15:57:09.988 INFO: Using isolated atom energies from training file
+2025-01-02 15:57:09.992 INFO: Training set [200 configs, 200 energy, 17418 forces] loaded from '/home/rushikeshp/Documents/MTech_Project/MACE/MACE_tut/Tutorials/data/solvent_xtb_train_200.xyz'
+2025-01-02 15:57:09.993 INFO: Using random 10% of training set for validation with indices saved in: ./valid_indices_3.txt
+2025-01-02 15:57:09.993 INFO: Validaton set contains 20 configurations [20 energy, 1923 forces]
+2025-01-02 15:57:10.332 INFO: Test set (1000 configs) loaded from '/home/rushikeshp/Documents/MTech_Project/MACE/MACE_tut/Tutorials/data/solvent_xtb_test.xyz':
+2025-01-02 15:57:10.333 INFO: Default_Default: 1000 configs, 1000 energy, 90228 forces
+2025-01-02 15:57:10.333 INFO: Total number of configurations: train=180, valid=20, tests=[Default_Default: 1000],
+2025-01-02 15:57:10.334 INFO: Atomic Numbers used: [1, 6, 8]
+2025-01-02 15:57:10.334 INFO: Atomic Energies used (z: eV) for head default: {1: -10.707211383396714, 6: -48.847445262804705, 8: -102.57117256025786}
+2025-01-02 15:57:10.482 INFO: Computing average number of neighbors
+2025-01-02 15:57:10.656 INFO: Average number of neighbors: 15.982962608337402
+2025-01-02 15:57:10.656 INFO: During training the following quantities will be reported: energy, forces
+2025-01-02 15:57:10.656 INFO: ===========MODEL DETAILS===========
+2025-01-02 15:57:10.718 INFO: Building model
+2025-01-02 15:57:10.718 INFO: Message passing with 128 channels and max_L=2 (128x0e+128x1o+128x2e)
+2025-01-02 15:57:10.718 INFO: 2 layers, each with correlation order: 3 (body order: 4) and spherical harmonics up to: l=3
+2025-01-02 15:57:10.719 INFO: 8 radial and 5 basis functions
+2025-01-02 15:57:10.719 INFO: Radial cutoff: 6.0 A (total receptive field for each atom: 12.0 A)
+2025-01-02 15:57:10.719 INFO: Distance transform for radial basis functions: None
+2025-01-02 15:57:10.719 INFO: Hidden irreps: 128x0e+128x1o+128x2e
+2025-01-02 15:57:13.560 INFO: Total number of parameters: 837264
+2025-01-02 15:57:13.560 INFO: 
+2025-01-02 15:57:13.560 INFO: ===========OPTIMIZER INFORMATION===========
+2025-01-02 15:57:13.560 INFO: Using ADAM as parameter optimizer
+2025-01-02 15:57:13.560 INFO: Batch size: 5
+2025-01-02 15:57:13.560 INFO: Using Exponential Moving Average with decay: 0.99
+2025-01-02 15:57:13.560 INFO: Number of gradient updates: 360
+2025-01-02 15:57:13.560 INFO: Learning rate: 0.01, weight decay: 5e-07
+2025-01-02 15:57:13.560 INFO: WeightedEnergyForcesLoss(energy_weight=8.000, forces_weight=1000.000)
+2025-01-02 15:57:13.561 INFO: Stage Two (after 7 epochs) with loss function: WeightedEnergyForcesLoss(energy_weight=8.000, forces_weight=1000.000), with energy weight : 8.0, forces weight : 1000.0 and learning rate : 0.001
+2025-01-02 15:57:13.672 WARNING: Cannot find checkpoint with tag 'test_run1_run-3' in 'test_run1/checkpoints'
+2025-01-02 15:57:13.673 INFO: Using gradient clipping with tolerance=10.000
+2025-01-02 15:57:13.673 INFO: 
+2025-01-02 15:57:13.673 INFO: ===========TRAINING===========
+2025-01-02 15:57:13.674 INFO: Started training, reporting errors on validation set
+2025-01-02 15:57:13.674 INFO: Loss metrics on validation set
+2025-01-02 15:57:15.901 INFO: Initial: head: default, loss=299.71771240, MAE_E= 9117.36 meV, MAE_F= 1122.16 meV / A
+2025-01-02 15:57:42.276 INFO: Epoch 0: head: default, loss=63.55058670, MAE_E=12360.53 meV, MAE_F=  520.64 meV / A
+2025-01-02 15:57:48.697 INFO: Epoch 1: head: default, loss=26.28932190, MAE_E= 4996.57 meV, MAE_F=  305.46 meV / A
+2025-01-02 15:57:54.225 INFO: Epoch 2: head: default, loss=14.90446186, MAE_E= 5722.87 meV, MAE_F=  231.53 meV / A
+2025-01-02 15:57:59.808 INFO: Epoch 3: head: default, loss=10.17562294, MAE_E= 4829.47 meV, MAE_F=  193.71 meV / A
+2025-01-02 15:58:05.349 INFO: Epoch 4: head: default, loss=7.37162304, MAE_E= 3929.87 meV, MAE_F=  174.18 meV / A
+2025-01-02 15:58:11.171 INFO: Epoch 5: head: default, loss=5.82491541, MAE_E= 3630.35 meV, MAE_F=  152.73 meV / A
+2025-01-02 15:58:16.974 INFO: Epoch 6: head: default, loss=4.86648655, MAE_E= 3662.67 meV, MAE_F=  141.97 meV / A
+2025-01-02 15:58:17.055 INFO: Changing loss based on Stage Two Weights
+2025-01-02 15:58:22.343 INFO: Epoch 7: head: default, loss=4.33555746, MAE_E= 3246.96 meV, MAE_F=  135.04 meV / A
+2025-01-02 15:58:28.497 INFO: Epoch 8: head: default, loss=3.89026952, MAE_E= 3410.71 meV, MAE_F=  128.06 meV / A
+2025-01-02 15:58:34.118 INFO: Epoch 9: head: default, loss=3.56682968, MAE_E= 3468.93 meV, MAE_F=  122.50 meV / A
+2025-01-02 15:58:34.157 INFO: Training complete
+2025-01-02 15:58:34.157 INFO: 
+2025-01-02 15:58:34.157 INFO: ===========RESULTS===========
+2025-01-02 15:58:34.157 INFO: Computing metrics for training, validation, and test sets
+2025-01-02 15:58:34.865 INFO: Loading checkpoint: test_run1/checkpoints/test_run1_run-3_epoch-6.pt
+2025-01-02 15:58:34.918 INFO: Loaded Stage one model from epoch 6 for evaluation
+2025-01-02 15:58:34.919 INFO: Evaluating train_default ...
+2025-01-02 15:58:37.815 INFO: Evaluating valid_default ...
+2025-01-02 15:58:37.971 INFO: Error-table on TRAIN and VALID:
++---------------+-------------+-----------------+------------------+
+|  config_type  | MAE E / meV | MAE F / meV / A | relative F MAE % |
++---------------+-------------+-----------------+------------------+
+| train_default |     2772.4  |        153.5    |        12.10     |
+| valid_default |     3662.7  |        142.0    |        12.76     |
++---------------+-------------+-----------------+------------------+
+2025-01-02 15:58:37.971 INFO: Evaluating Default_Default ...
+2025-01-02 15:58:48.289 INFO: Error-table on TEST:
++-----------------+-------------+-----------------+------------------+
+|   config_type   | MAE E / meV | MAE F / meV / A | relative F MAE % |
++-----------------+-------------+-----------------+------------------+
+| Default_Default |     3042.3  |        160.1    |        12.56     |
++-----------------+-------------+-----------------+------------------+
+2025-01-02 15:58:48.416 INFO: Saved model at test_run1/models/test_run1.model
+2025-01-02 15:58:48.535 INFO: Saved model to test_run1/checkpoints/test_run1_run-3.model
+2025-01-02 15:58:48.536 INFO: Loading checkpoint: test_run1/checkpoints/test_run1_run-3_epoch-9_swa.pt
+2025-01-02 15:58:48.577 INFO: Loaded Stage two model from epoch 9 for evaluation
+2025-01-02 15:58:48.578 INFO: Evaluating train_default ...
+2025-01-02 15:58:51.930 INFO: Evaluating valid_default ...
+2025-01-02 15:58:52.178 INFO: Error-table on TRAIN and VALID:
++---------------+-------------+-----------------+------------------+
+|  config_type  | MAE E / meV | MAE F / meV / A | relative F MAE % |
++---------------+-------------+-----------------+------------------+
+| train_default |     2534.0  |        130.5    |        10.28     |
+| valid_default |     3468.9  |        122.5    |        11.01     |
++---------------+-------------+-----------------+------------------+
+2025-01-02 15:58:52.179 INFO: Evaluating Default_Default ...
+2025-01-02 15:59:02.024 INFO: Error-table on TEST:
++-----------------+-------------+-----------------+------------------+
+|   config_type   | MAE E / meV | MAE F / meV / A | relative F MAE % |
++-----------------+-------------+-----------------+------------------+
+| Default_Default |     2786.9  |        138.1    |        10.84     |
++-----------------+-------------+-----------------+------------------+
+2025-01-02 15:59:02.075 INFO: Saved stagetwo model at test_run1/models/test_run1_stagetwo.model
+2025-01-02 15:59:02.143 INFO: Saved model to test_run1/checkpoints/test_run1_run-3_stagetwo.model
+2025-01-02 15:59:02.143 INFO: Done

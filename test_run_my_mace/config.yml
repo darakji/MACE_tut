@@ -1,0 +1,50 @@
+    
+model: "ScaleShiftMACE" 
+name: "test_run1" 
+model_dir: "test_run1/models" 
+log_dir: "test_run1/logs" 
+checkpoints_dir: "test_run1/checkpoints" 
+results_dir: "test_run1/results" 
+downloads_dir: "test_run1/downloads"
+
+train_file: "/home/rushikeshp/Documents/MTech_Project/MACE/MACE_tut/Tutorials/data/solvent_xtb_train_200.xyz" 
+valid_fraction: 0.1
+test_file: "/home/rushikeshp/Documents/MTech_Project/MACE/MACE_tut/Tutorials/data/solvent_xtb_test.xyz"
+energy_key: "energy_xtb" 
+forces_key: "forces_xtb" 
+
+num_interactions: 2 
+num_channels: 128
+max_L: 2
+correlation: 3 
+r_max: 6.0 
+
+batch_size: 5
+max_num_epochs: 10
+patience: 10
+forces_weight: 1000
+energy_weight: 8
+lr: 1e-2
+weight_decay: 5e-7
+clip_grad: 10.0
+eval_interval: 1
+valid_batch_size: 10
+max_ell: 3 
+E0s: "average" 
+amsgrad: True
+
+swa: True
+start_swa: 7
+swa_lr: 1e-3
+swa_forces_weight: 1000
+swa_energy_weight: 8
+ema: True
+ema_decay: 0.99
+
+restart_latest: True
+error_table: "TotalMAE"
+
+seed: 3
+device: cuda
+default_dtype: "float32"
+
